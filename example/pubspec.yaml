@@ -1,0 +1,13 @@
+name: example
+description: Example on Sliver AppBar.
+
+dependencies:
+  flutter:
+    sdk: flutter
+  sliver_fab:
+    path: ../
+
+flutter:
+  uses-material-design: true
+  assets:
+    - img.jpg

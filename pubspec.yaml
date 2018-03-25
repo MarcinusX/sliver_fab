@@ -1,0 +1,12 @@
+name: sliver_fab
+description: A new Flutter project.
+version: 0.0.1
+author:
+homepage:
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
