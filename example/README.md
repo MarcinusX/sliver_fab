@@ -1,6 +1,6 @@
-# example
+# Example on SliverFab
 
-Example on Sliver AppBar.
+Example on SliverFab.
 
 ## Getting Started
 

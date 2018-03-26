@@ -1,10 +1,10 @@
-library app_bar_fab;
+library sliver_fab;
 
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 /// A helper class if you want a FloatingActionButton to be pinned in the FlexibleAppBar
-class AppBarFab extends StatefulWidget {
+class SliverFab extends StatefulWidget {
   ///List of slivers placed in CustomScrollView
   final List<Widget> slivers;
 
@@ -22,7 +22,7 @@ class AppBarFab extends StatefulWidget {
   ///     If you want [floatingActionButton] to shrink earlier, increase the value.
   final double topScalingEdge;
 
-  AppBarFab(
+  SliverFab(
       {@required this.slivers,
       @required this.floatingActionButton,
       this.expandedHeight = 256.0,
@@ -31,11 +31,11 @@ class AppBarFab extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return new AppBarFabState();
+    return new SliverFabState();
   }
 }
 
-class AppBarFabState extends State<AppBarFab> {
+class SliverFabState extends State<SliverFab> {
   ScrollController scrollController;
 
   @override
