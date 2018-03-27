@@ -1,6 +1,6 @@
 name: sliver_fab
 description: A wrapper widget allowing to use FloatingActionButton on the edge of FlexibleSpacebar
-version: 0.0.1
+version: 0.1.0
 author: Marcin Szalek <marcinszalek1@gmail.com>
 homepage: https://github.com/MarcinusX/sliver_fab
 
