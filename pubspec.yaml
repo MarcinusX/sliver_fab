@@ -4,6 +4,9 @@ version: 0.0.1
 author: Marcin Szalek <marcinszalek1@gmail.com>
 homepage: https://github.com/MarcinusX/sliver_fab
 
+environment:
+  sdk: ">=1.23.0 <2.0.0"
+
 dependencies:
   flutter:
     sdk: flutter

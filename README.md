@@ -79,3 +79,7 @@ Now in your Dart code, you can use:
 import 'package:sliver_fab/sliver_fab.dart';
 ```
         
+
+## Contributing
+
+This package was made mostly for use case I needed. If you fill it is missing any features or you have found a bug, **pull requests are very welcome!**

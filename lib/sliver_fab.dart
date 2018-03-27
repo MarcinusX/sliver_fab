@@ -1,7 +1,7 @@
 library sliver_fab;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 /// A helper class if you want a FloatingActionButton to be pinned in the FlexibleAppBar
 class SliverFab extends StatefulWidget {
