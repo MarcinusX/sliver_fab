@@ -65,13 +65,14 @@ class SliverFabState extends State<SliverFab> {
   }
 
   Widget _buildFab() {
-    final double defaultTopMargin = widget.expandedHeight - 4.0;
+    final topMarginAdjustVal = Theme.of(context).platform == TargetPlatform.iOS ? 12.0 : -4.0;
+    final double defaultTopMargin = widget.expandedHeight + topMarginAdjustVal;
 
     double top = defaultTopMargin;
     double scale = 1.0;
     if (scrollController.hasClients) {
       double offset = scrollController.offset;
-      top -= offset;
+      top -= offset > 0 ? offset : 0;
       if (offset < defaultTopMargin - widget.topScalingEdge) {
         scale = 1.0;
       } else if (offset < defaultTopMargin - widget.topScalingEdge / 2) {
