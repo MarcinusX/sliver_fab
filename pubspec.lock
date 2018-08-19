@@ -25,13 +25,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
-  sliver_fab:
-    dependency: "direct main"
-    description:
-      path: ".."
-      relative: true
-    source: path
-    version: "0.1.1"
   typed_data:
     dependency: transitive
     description:
