@@ -9,30 +9,35 @@ class SliverFab extends StatefulWidget {
   final List<Widget> slivers;
 
   ///FloatingActionButton placed on the edge of FlexibleAppBar and rest of view
-  final Widget floatingActionButton;
+  final Widget floatingWidget;
 
   ///Expanded height of FlexibleAppBar
   final double expandedHeight;
 
-  ///Right margin of [floatingActionButton]
-  final double marginRight;
-
-  ///Number of pixels from top from which the [floatingActionButton] should start shrinking.
+  ///Number of pixels from top from which the [floatingWidget] should start shrinking.
   ///E.g. If your SliverAppBar is pinned, I would recommend this leaving as default 96.0
   ///     If you want [floatingActionButton] to shrink earlier, increase the value.
   final double topScalingEdge;
 
+  FloatingPosition floatingPosition;
+
   SliverFab(
       {@required this.slivers,
-      @required this.floatingActionButton,
+      @required this.floatingWidget,
       this.expandedHeight = 256.0,
-      this.marginRight = 16.0,
-      this.topScalingEdge = 96.0});
+      this.topScalingEdge = 96.0,
+      this.floatingPosition});
 
   @override
   State<StatefulWidget> createState() {
     return new SliverFabState();
   }
+}
+
+class FloatingPosition{
+  double top, right, bottom, left;
+
+  FloatingPosition({this.top, this.right, this.bottom, this.left});
 }
 
 class SliverFabState extends State<SliverFab> {
@@ -83,13 +88,34 @@ class SliverFabState extends State<SliverFab> {
       }
     }
 
+    double right = null;
+    double bottom = null;
+    double left = null;
+
+    if(widget.floatingPosition != null){
+      if(widget.floatingPosition.top != null){
+        top = (top-widget.floatingPosition.top);
+      }
+      if(widget.floatingPosition.right != null){
+        right = widget.floatingPosition.right;
+      }
+      if(widget.floatingPosition.bottom != null){
+        bottom = widget.floatingPosition.bottom;
+      }
+      if(widget.floatingPosition.left != null){
+        left = widget.floatingPosition.left;
+      }
+    }
+
     return new Positioned(
       top: top,
-      right: widget.marginRight,
+      right: right,
+      bottom: bottom,
+      left: left,
       child: new Transform(
         transform: new Matrix4.identity()..scale(scale, scale),
         alignment: Alignment.center,
-        child: widget.floatingActionButton,
+        child: widget.floatingWidget,
       ),
     );
   }
