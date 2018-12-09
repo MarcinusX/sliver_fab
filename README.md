@@ -4,6 +4,9 @@ A wrapper widget allowing to use FloatingActionButton on the edge of FlexibleSpa
 
 ![gif](https://raw.githubusercontent.com/MarcinusX/sliver_fab/master/example/screenshots/example.gif)
 
+![gif](https://raw.githubusercontent.com/Matheus-Perez/sliver_fab/master/example/screenshots/exampleTwo.gif)
+
+
 ## [Example usage](https://github.com/MarcinusX/sliver_fab/tree/master/example)
 ```
 class MyHomePage extends StatelessWidget {
