@@ -16,12 +16,13 @@ class MyHomePage extends StatelessWidget {
       body: new Builder(
         builder: (context) =>
         new SliverFab(
-          floatingActionButton: new FloatingActionButton(
+          floatingWidget: FloatingActionButton(
             onPressed: () =>
                 Scaffold.of(context).showSnackBar(
-                    new SnackBar(content: new Text("You clicked FAB!"))),
-            child: new Icon(Icons.add),
+                    SnackBar(content: Text("You clicked FAB!"))),
+            child: Icon(Icons.add),
           ),
+          floatingPosition: FloatingPosition(right: 16),
           expandedHeight: 256.0,
           slivers: <Widget>[
             new SliverAppBar(
