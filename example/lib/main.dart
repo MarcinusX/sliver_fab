@@ -1,5 +1,6 @@
+import 'package:example/exampleOneScreen.dart';
+import 'package:example/exampleTwoScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:sliver_fab/sliver_fab.dart';
 
 void main() => runApp(new MyApp());
 
@@ -20,36 +21,34 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: new Builder(
-        builder: (context) =>
-        new SliverFab(
-          floatingActionButton: new FloatingActionButton(
-            onPressed: () =>
-                Scaffold.of(context).showSnackBar(
-                    new SnackBar(content: new Text("You clicked FAB!"))),
-            child: new Icon(Icons.add),
-          ),
-          expandedHeight: 256.0,
-          slivers: <Widget>[
-            new SliverAppBar(
-              expandedHeight: 256.0,
-              pinned: true,
-              flexibleSpace: new FlexibleSpaceBar(
-                title: new Text("SliverFab Example"),
-                background: new Image.asset(
-                  "img.jpg",
-                  fit: BoxFit.cover,
-                ),
+      appBar: AppBar(
+        title: Text("Examples"),
+      ),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(16),
+              child: RaisedButton(
+                child: Text("Example 1"),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ExampleOneScreen(),
+                      ));
+                },
               ),
             ),
-            new SliverList(
-              delegate: new SliverChildListDelegate(
-                new List.generate(
-                  30,
-                      (int index) =>
-                  new ListTile(title: new Text("Item $index")),
-                ),
-              ),
+            RaisedButton(
+              child: Text("Example 2"),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ExampleTwoScreen(),
+                    ));
+              },
             ),
           ],
         ),

@@ -1,8 +1,11 @@
 # sliver_fab
 
-A wrapper widget allowing to use FloatingActionButton on the edge of FlexibleSpacebar.
+A wrapper widget allowing to place a widget on the edge of FlexibleSpacebar.
 
 ![gif](https://raw.githubusercontent.com/MarcinusX/sliver_fab/master/example/screenshots/example.gif)
+
+![gif](https://raw.githubusercontent.com/Matheus-Perez/sliver_fab/master/example/screenshots/exampleTwo.gif)
+
 
 ## [Example usage](https://github.com/MarcinusX/sliver_fab/tree/master/example)
 ```
@@ -13,12 +16,13 @@ class MyHomePage extends StatelessWidget {
       body: new Builder(
         builder: (context) =>
         new SliverFab(
-          floatingActionButton: new FloatingActionButton(
+          floatingWidget: FloatingActionButton(
             onPressed: () =>
                 Scaffold.of(context).showSnackBar(
-                    new SnackBar(content: new Text("You clicked FAB!"))),
-            child: new Icon(Icons.add),
+                    SnackBar(content: Text("You clicked FAB!"))),
+            child: Icon(Icons.add),
           ),
+          floatingPosition: FloatingPosition(right: 16),
           expandedHeight: 256.0,
           slivers: <Widget>[
             new SliverAppBar(
@@ -56,7 +60,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```
 dependencies:
-  sliver_fab: "^0.1.0"
+  sliver_fab: "^1.0.0"
 
 ```
 

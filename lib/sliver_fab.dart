@@ -9,25 +9,32 @@ class SliverFab extends StatefulWidget {
   final List<Widget> slivers;
 
   ///FloatingActionButton placed on the edge of FlexibleAppBar and rest of view
-  final Widget floatingActionButton;
+  final Widget floatingWidget;
 
   ///Expanded height of FlexibleAppBar
   final double expandedHeight;
 
-  ///Right margin of [floatingActionButton]
-  final double marginRight;
-
-  ///Number of pixels from top from which the [floatingActionButton] should start shrinking.
+  ///Number of pixels from top from which the [floatingWidget] should start shrinking.
   ///E.g. If your SliverAppBar is pinned, I would recommend this leaving as default 96.0
   ///     If you want [floatingActionButton] to shrink earlier, increase the value.
   final double topScalingEdge;
 
-  SliverFab(
-      {@required this.slivers,
-      @required this.floatingActionButton,
-      this.expandedHeight = 256.0,
-      this.marginRight = 16.0,
-      this.topScalingEdge = 96.0});
+  ///Position of the widget.
+  final FloatingPosition floatingPosition;
+
+  SliverFab({
+    @required this.slivers,
+    @required this.floatingWidget,
+    this.floatingPosition = const FloatingPosition(right: 16.0),
+    this.expandedHeight = 256.0,
+    this.topScalingEdge = 96.0,
+  }) {
+    assert(slivers != null);
+    assert(floatingWidget != null);
+    assert(floatingPosition != null);
+    assert(expandedHeight != null);
+    assert(topScalingEdge != null);
+  }
 
   @override
   State<StatefulWidget> createState() {
@@ -53,9 +60,9 @@ class SliverFabState extends State<SliverFab> {
 
   @override
   Widget build(BuildContext context) {
-    return new Stack(
+    return Stack(
       children: <Widget>[
-        new CustomScrollView(
+        CustomScrollView(
           controller: scrollController,
           slivers: widget.slivers,
         ),
@@ -65,32 +72,58 @@ class SliverFabState extends State<SliverFab> {
   }
 
   Widget _buildFab() {
-    final topMarginAdjustVal = Theme.of(context).platform == TargetPlatform.iOS ? 12.0 : -4.0;
-    final double defaultTopMargin = widget.expandedHeight + topMarginAdjustVal;
+    final double defaultFabSize = 56.0;
+    final double paddingTop = MediaQuery.of(context).padding.top;
+    final double defaultTopMargin = widget.expandedHeight +
+        paddingTop +
+        (widget.floatingPosition.top ?? 0) -
+        defaultFabSize / 2;
+
+    final double scale0edge = widget.expandedHeight - kToolbarHeight;
+    final double scale1edge = defaultTopMargin - widget.topScalingEdge;
 
     double top = defaultTopMargin;
     double scale = 1.0;
     if (scrollController.hasClients) {
       double offset = scrollController.offset;
       top -= offset > 0 ? offset : 0;
-      if (offset < defaultTopMargin - widget.topScalingEdge) {
+      if (offset < scale1edge) {
         scale = 1.0;
-      } else if (offset < defaultTopMargin - widget.topScalingEdge / 2) {
-        scale = (defaultTopMargin - widget.topScalingEdge / 2 - offset) /
-            (widget.topScalingEdge / 2);
-      } else {
+      } else if (offset > scale0edge) {
         scale = 0.0;
+      } else {
+        scale = (scale0edge - offset) / (scale0edge - scale1edge);
       }
     }
 
-    return new Positioned(
+    return Positioned(
       top: top,
-      right: widget.marginRight,
+      right: widget.floatingPosition.right,
+      left: widget.floatingPosition.left,
       child: new Transform(
         transform: new Matrix4.identity()..scale(scale, scale),
         alignment: Alignment.center,
-        child: widget.floatingActionButton,
+        child: widget.floatingWidget,
       ),
     );
   }
+}
+
+///A class representing position of the widget.
+///At least one value should be not null
+class FloatingPosition {
+  ///Can be negative. Represents how much should you change the default position.
+  ///E.g. if your widget is bigger than normal [FloatingActionButton] by 20 pixels,
+  ///you can set it to -10 to make it stick to the edge
+  final double top;
+
+  ///Margin from the right. Should be positive.
+  ///The widget will stretch if both [right] and [left] are not nulls.
+  final double right;
+
+  ///Margin from the left. Should be positive.
+  ///The widget will stretch if both [right] and [left] are not nulls.
+  final double left;
+
+  const FloatingPosition({this.top, this.right, this.left});
 }
