@@ -1,3 +1,6 @@
+## [2.0.0]
+* Updates the lib for null safety (Chrystoffer Kugler Horochovec)
+
 ## [1.0.0]
 * **Breaking change:** Parameter `floatingActionButton` changed to `floatingWidget`
 * **Breaking change:** Parameter `marginRight` changed to `floatingPosition`
