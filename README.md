@@ -60,7 +60,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```
 dependencies:
-  sliver_fab: "^1.0.0"
+  sliver_fab: "^2.0.0"
 
 ```
 
