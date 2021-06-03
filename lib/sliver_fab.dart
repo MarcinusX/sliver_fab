@@ -1,6 +1,5 @@
 library sliver_fab;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// A helper class if you want a FloatingActionButton to be pinned in the FlexibleAppBar
@@ -23,18 +22,12 @@ class SliverFab extends StatefulWidget {
   final FloatingPosition floatingPosition;
 
   SliverFab({
-    @required this.slivers,
-    @required this.floatingWidget,
+    required this.slivers,
+    required this.floatingWidget,
     this.floatingPosition = const FloatingPosition(right: 16.0),
     this.expandedHeight = 256.0,
     this.topScalingEdge = 96.0,
-  }) {
-    assert(slivers != null);
-    assert(floatingWidget != null);
-    assert(floatingPosition != null);
-    assert(expandedHeight != null);
-    assert(topScalingEdge != null);
-  }
+  });
 
   @override
   State<StatefulWidget> createState() {
@@ -43,18 +36,18 @@ class SliverFab extends StatefulWidget {
 }
 
 class SliverFabState extends State<SliverFab> {
-  ScrollController scrollController;
+  ScrollController? scrollController;
 
   @override
   void initState() {
     super.initState();
     scrollController = new ScrollController();
-    scrollController.addListener(() => setState(() {}));
+    scrollController!.addListener(() => setState(() {}));
   }
 
   @override
   void dispose() {
-    scrollController.dispose();
+    scrollController!.dispose();
     super.dispose();
   }
 
@@ -84,8 +77,8 @@ class SliverFabState extends State<SliverFab> {
 
     double top = defaultTopMargin;
     double scale = 1.0;
-    if (scrollController.hasClients) {
-      double offset = scrollController.offset;
+    if (scrollController!.hasClients) {
+      double offset = scrollController!.offset;
       top -= offset > 0 ? offset : 0;
       if (offset < scale1edge) {
         scale = 1.0;
@@ -115,15 +108,15 @@ class FloatingPosition {
   ///Can be negative. Represents how much should you change the default position.
   ///E.g. if your widget is bigger than normal [FloatingActionButton] by 20 pixels,
   ///you can set it to -10 to make it stick to the edge
-  final double top;
+  final double? top;
 
   ///Margin from the right. Should be positive.
   ///The widget will stretch if both [right] and [left] are not nulls.
-  final double right;
+  final double? right;
 
   ///Margin from the left. Should be positive.
   ///The widget will stretch if both [right] and [left] are not nulls.
-  final double left;
+  final double? left;
 
   const FloatingPosition({this.top, this.right, this.left});
 }
